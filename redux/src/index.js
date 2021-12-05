@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import user from "./reducers/userReducer";
 
-// store
+// reducerを登録したstoreを生成
 const store = createStore(
   combineReducers(
     {
@@ -16,6 +16,11 @@ const store = createStore(
   )
 );
 
+/**
+ * Providerとは
+ * ①Reactコンポーネント内でreact-reduxのconnect()関数を使えるようにする。
+ * ②ラップしたコンポーネントにstore情報を渡す。
+ */
 ReactDOM.render(
   <Provider store={store}>
     <App />

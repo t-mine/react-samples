@@ -24,13 +24,25 @@ class Home extends React.Component {
   }
 }
 
+/**
+ * storeが更新されるたびに呼び出される関数。
+ * storeからstateを取得するための関数。
+ * componentではthis.props.userという形でpropsからstoreのstateを参照できるようになる。
+ * connectの第1引数に渡す。
+ */
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
+/**
+ * stateを書き換える。
+ * componentではthis.props.updateName()という形で参照できる。
+ * connectの第2引数に渡す。
+ */
 const mapDispatchToProps = (dispatch) => ({
   updateName: (name) => dispatch(updateName(name)),
   updateAge: (age) => dispatch(updateAge(age)),
 });
 
+// Homeコンポーネントとstoreを繋げている
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
