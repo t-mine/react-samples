@@ -4,16 +4,25 @@ import gifApi from "../api/gif";
 const initialState = {
   url: "",
   loading: false,
-  error: false
+  error: false,
 };
 
+/**
+ * Redux ToolkitのcreateSlice関数で個別のストアを生成する
+ * useSelector((state) => state.gif.url)でVendingMachine.jsからアクセスできる。
+ */
 const slice = createSlice({
   name: "gif",
   initialState,
   reducers: {
-    fetchStart: state => {
+    fetchStart: (state) => {
       return Object.assign({}, state, { url: "", loading: true });
     },
+    /**
+     * 第一引数は現在（更新前）のState
+     * 第二引数は渡されたaction
+     * action.payloadプロパティに、Action Creatorに渡された引数が入っている
+     */
     fetchSucceed: (state, action) => {
       return Object.assign({}, state, { url: action.payload, loading: false });
     },
@@ -23,19 +32,19 @@ const slice = createSlice({
     },
     clear: () => {
       return { url: "", loading: false, error: false };
-    }
-  }
+    },
+  },
 });
 
-// Reducer
+// Reducerをエクスポート
 export default slice.reducer;
 
-// Actions
+// Action Creatorをエクスポート
 export const { clear } = slice.actions;
 
 // Async task
 export function fetchAsync() {
-  return async function(dispatch) {
+  return async function (dispatch) {
     dispatch(slice.actions.fetchStart());
 
     try {

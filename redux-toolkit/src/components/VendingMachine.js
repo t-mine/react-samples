@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { fetchAsync, clear } from "../stores/gif";
 
 function VendingMachine() {
-  const imageUrl = useSelector(state => state.gif.url);
-  const loading = useSelector(state => state.gif.loading);
-  const error = useSelector(state => state.gif.error);
+  // 状態を参照するためにreact-reduxが提供するuseSelectorフックを使用する。
+  const imageUrl = useSelector((state) => state.gif.url);
+  const loading = useSelector((state) => state.gif.loading);
+  const error = useSelector((state) => state.gif.error);
 
   const dispatch = useDispatch();
 
@@ -13,16 +14,17 @@ function VendingMachine() {
     <div>
       <h1 className="title">猫GIFガチャ</h1>
       <Gif {...{ imageUrl, loading, error }} />
-      <hr/>
+      <hr />
       <div className="buttons">
         <button
           className="button is-primary"
           onClick={() => dispatch(fetchAsync())}
-        >Play</button>
-        <button
-          className="button"
-          onClick={() => dispatch(clear())}
-        >Clear</button>
+        >
+          Play
+        </button>
+        <button className="button" onClick={() => dispatch(clear())}>
+          Clear
+        </button>
       </div>
     </div>
   );
